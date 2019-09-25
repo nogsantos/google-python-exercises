@@ -41,7 +41,7 @@ def not_bad(s):
     has_bad = s.find("bad")
 
     if has_not > 0 and has_bad > 0 and has_bad > has_not:
-        s = s.replace(s[has_not:(has_bad + len(replace_to))], replace_to)
+        s = s.replace(s[has_not:(has_bad + 3)], replace_to) 
 
     return f"{s}"
 
