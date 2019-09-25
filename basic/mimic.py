@@ -40,32 +40,51 @@ Could work on getting it to put in linebreaks around 70
 columns, so the output looks better.
 
 """
-
+import argparse
 import random
-import sys
+from collections import defaultdict
 
 
-def mimic_dict(filename):
-  """Returns mimic dict mapping each word to list of words which follow it."""
-  # +++your code here+++
-  return
+def read_words(file):
+    return file.read().split()
 
 
-def print_mimic(mimic_dict, word):
-  """Given mimic dict and start word, prints 200 random words."""
-  # +++your code here+++
-  return
+def glossary(words):
+    """Returns mimic dict mapping each word to list of words which follow it."""
+    first, last, empty = words[0], words[-1], ''
+
+    d = defaultdict(list, {
+        empty: [first],
+        last: [empty],
+    })
+
+    for w, n in zip(words[:-1], words[1:]):
+        d[w].append(n)
+
+    return d
+
+
+def mimic(d, first=''):
+    """Given mimic dict and start word, prints 200 random words."""
+    l = []
+    w = first
+
+    for _ in range(200):
+        w = random.choice(d[w])
+        l.append(w)
+
+    return ' '.join(l)
 
 
 # Provided main(), calls mimic_dict() and mimic()
 def main():
-  if len(sys.argv) != 2:
-    print('usage: ./mimic.py file-to-read')
-    sys.exit(1)
+    parser = argparse.ArgumentParser(description='Gerador de lero-lero.')
+    parser.add_argument('file', type=argparse.FileType())
 
-  dict = mimic_dict(sys.argv[1])
-  print_mimic(dict, '')
+    args = parser.parse_args()
+
+    print(mimic(glossary(read_words(args.file))))
 
 
 if __name__ == '__main__':
-  main()
+    main()
