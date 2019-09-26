@@ -16,14 +16,19 @@
 # are some additional functions to try in list2.py.
 
 
-# A. match_ends
-# Given a list of strings, return the count of the number of
-# strings where the string length is 2 or more and the first
-# and last chars of the string are the same.
-# Note: python does not have a ++ operator, but += works.
 def match_ends(words):
-    # +++your code here+++
-    return
+    """
+    A. match_ends
+    Given a list of strings, return the count of the number of
+    strings where the string length is 2 or more and the first
+    and last chars of the string are the same.
+    Note: python does not have a ++ operator, but += works.
+    """
+    count = 0
+    for the_string in words:
+        if len(the_string) >= 2 and the_string[0] == the_string[-1]:
+            count += 1
+    return count
 
 
 # B. front_x
